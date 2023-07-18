@@ -1,0 +1,99 @@
+import java.util.ArrayList;
+import java.util.List;
+
+// Represents a food item
+class FoodItem {
+    private String name;
+    private double price;
+
+    public FoodItem(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+}
+
+// Represents a restaurant
+class Restaurant {
+    private String name;
+    private List<FoodItem> menu;
+
+    public Restaurant(String name) {
+        this.name = name;
+        this.menu = new ArrayList<>();
+    }
+
+    public void addToMenu(FoodItem foodItem) {
+        menu.add(foodItem);
+    }
+
+    public void displayMenu() {
+        System.out.println("Menu for " + name + ":");
+        for (FoodItem foodItem : menu) {
+            System.out.println(foodItem.getName() + " - $" + foodItem.getPrice());
+        }
+    }
+
+    public void placeOrder(FoodItem foodItem) {
+        System.out.println("Placing order for " + foodItem.getName() + " from " + name);
+        // Place order logic goes here
+    }
+}
+
+// Represents the online food delivery app
+class FoodDeliveryApp {
+    private List<Restaurant> restaurants;
+
+    public FoodDeliveryApp() {
+        this.restaurants = new ArrayList<>();
+    }
+
+    public void addRestaurant(Restaurant restaurant) {
+        restaurants.add(restaurant);
+    }
+
+    public void displayRestaurants() {
+        System.out.println("Available Restaurants:");
+        for (Restaurant restaurant : restaurants) {
+            System.out.println(restaurant.getName());
+        }
+    }
+}
+
+// Main class
+public class OnlineFoodDeliveryApp {
+    public static void main(String[] args) {
+        // Create an instance of the food delivery app
+        FoodDeliveryApp foodDeliveryApp = new FoodDeliveryApp();
+
+        // Create some restaurants
+        Restaurant restaurant1 = new Restaurant("Restaurant 1");
+        Restaurant restaurant2 = new Restaurant("Restaurant 2");
+
+        // Add food items to the restaurant menus
+        restaurant1.addToMenu(new FoodItem("Burger", 10.99));
+        restaurant1.addToMenu(new FoodItem("Pizza", 15.99));
+        restaurant2.addToMenu(new FoodItem("Sushi", 12.99));
+        restaurant2.addToMenu(new FoodItem("Salad", 8.99));
+
+        // Add the restaurants to the app
+        foodDeliveryApp.addRestaurant(restaurant1);
+        foodDeliveryApp.addRestaurant(restaurant2);
+
+        // Display available restaurants
+        foodDeliveryApp.displayRestaurants();
+
+        // Display the menu for a specific restaurant
+        restaurant1.displayMenu();
+
+        // Place an order from a restaurant
+        restaurant2.placeOrder(new FoodItem("Sushi", 12.99));
+    }
+}
